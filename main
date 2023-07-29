@@ -5,7 +5,7 @@ source "${RRCONFINC}"
 
 doDisable() {
   local module="$1"
-  
+
   systemctl disable "${module}.timer" || true
   rm -f "/etc/systemd/system/${module}.timer"
   rm -f "/etc/systemd/system/${module}.service"
@@ -14,7 +14,7 @@ doDisable() {
 
 doEnable() {
   local module="$1"
-  
+
   systemctl is-enabled "${module}.timer" >/dev/null 2>&1 &&
     return 0
   install -m 644 "${modulepath}/systemd.timer" "/etc/systemd/system/${module}.timer"
